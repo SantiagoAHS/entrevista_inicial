@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Grupos</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/lstyles.css' %}">
+</head>
+<body>
+    <h1>Lista de Grupos</h1>
+    <form method="GET" action="">
+        <label for="profesor_id">Seleccionar Profesor:</label>
+        <select name="profesor_id" id="profesor_id">
+            <option value="">-- Selecciona un Profesor --</option>
+            {% for profesor in profesores %}
+                <option value="{{ profesor.id }}">{{ profesor.nombre }}</option>
+            {% endfor %}
+        </select>
+        <button type="submit">Filtrar</button>
+    </form>
+    {% if estudiantes %}
+        <h2>Estudiantes</h2>
+        <form method="GET" action="">
+            <input type="hidden" name="profesor_id" value="{{ request.GET.profesor_id }}">
+            <button type="submit" name="export" value="true">Exportar a Excel</button>
+        </form>
+        <ul class="estudiantes-list">
+            {% for estudiante in estudiantes %}
+                <li class="estudiante-item">
+                    <div>
+                        <strong>Nombre:</strong> {{ estudiante.nombre }}
+                        <strong>Edad:</strong> {{ estudiante.edad }}
+                        <strong>Carrera:</strong> {{ estudiante.carrera }}
+                        <strong>Grupo:</strong> {{ estudiante.grupo_escolar }}
+                    </div>
+                    <!-- Agrega más datos del estudiante aquí -->
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No hay estudiantes para el profesor seleccionado.</p>
+    {% endif %}
+</body>
+</html>

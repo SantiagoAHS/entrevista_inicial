@@ -1,18 +1,20 @@
-<!-- mi_aplicacion/templates/formulario.html -->
-{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formulario de Persona</title>
-    <link rel="stylesheet" href="{% static 'css/fstyles.css' %}">
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/fstyles.css' %}">
 </head>
 <body>
     <div class="container">
         <h1>Formulario de Persona</h1>
+
         {% if enviado %}
-            <p>Datos enviados correctamente.</p>
+            <p>Formulario enviado con éxito!</p>
         {% endif %}
+        
         <form method="post">
             {% csrf_token %}
             {{ form.as_p }}
@@ -21,4 +23,3 @@
     </div>
 </body>
 </html>
-

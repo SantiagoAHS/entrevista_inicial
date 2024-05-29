@@ -75,8 +75,12 @@ WSGI_APPLICATION = 'modulo_uno.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'modulo_inicial',         # Nombre de la base de datos que creaste
+        'USER': 'root',               # Usuario por defecto de MySQL en XAMPP
+        'PASSWORD': '',               # Contraseña del usuario root, usualmente vacía en XAMPP
+        'HOST': 'localhost',          # Dirección del servidor
+        'PORT': '3306',               # Puerto por defecto de MySQL
     }
 }
 

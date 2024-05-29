@@ -1,0 +1,20 @@
+/* lstyles.css */
+
+.estudiantes-list {
+    display: flex;
+    flex-direction: column; /* Asegura que los elementos estén en una columna */
+    padding: 0;
+    list-style: none;
+}
+
+.estudiante-item {
+    display: flex;
+    flex-wrap: wrap; /* Permite que los elementos se ajusten si hay más de uno */
+    margin-bottom: 10px; /* Espacio entre los elementos */
+}
+
+.estudiante-item div {
+    flex: 1 1 100%; /* Asegura que cada elemento ocupe el 100% del ancho disponible */
+    padding: 5px;
+    box-sizing: border-box;
+}

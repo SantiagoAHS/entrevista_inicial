@@ -1,4 +1,4 @@
-/* mi_aplicacion/static/css/styles.css */
+/* mi_aplicacion/static/css/fstyles.css */
 
 body {
     font-family: Arial, sans-serif;
@@ -8,8 +8,8 @@ body {
 }
 
 .container {
-    width: 50%;
-    margin: 0 auto;
+    width: 60%;
+    margin: 50px auto;
     padding: 20px;
     background-color: #fff;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -21,38 +21,68 @@ h1 {
 }
 
 form {
-    display: flex;
-    flex-direction: column;
-    background-color: #fff;
     padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 form label {
-    margin-top: 10px;
+    margin-top: 20px; /* Aumentar el espacio entre las preguntas */
+    display: block;
+    font-weight: bold;
 }
 
 form input[type="text"],
 form input[type="email"],
-form input[type="number"] {
+form input[type="number"],
+form input[type="date"],
+form textarea,
+form select {
+    width: calc(100% - 22px); /* Ajustar ancho para el padding y border */
     padding: 10px;
     margin-top: 5px;
+    margin-bottom: 20px;
     border: 1px solid #ccc;
     border-radius: 4px;
     background-color: #fff;
+    box-sizing: border-box;
+}
+
+form textarea {
+    resize: vertical; /* Permitir redimensionar verticalmente */
 }
 
 form button {
     margin-top: 20px;
-    padding: 10px;
+    padding: 10px 20px;
     background-color: #4CAF50;
     color: white;
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    transition: background-color 0.3s ease;
+    display: block;
+    margin: 0 auto; /* Centrar el botón */
 }
 
 form button:hover {
     background-color: #45a049;
+}
+
+/* Estilo para los checkboxes */
+.form-check {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.form-check input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+.form-check label {
+    margin-right: 10px;
+    font-weight: normal; /* Para que no se vea negrita */
+}
+
+.form-check span {
+    font-weight: bold;
 }
