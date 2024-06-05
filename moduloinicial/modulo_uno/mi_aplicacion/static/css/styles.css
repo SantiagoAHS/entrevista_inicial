@@ -1,18 +1,52 @@
-/* mi_aplicacion/static/css/styles.css */
+/* mi_aplicacion/static/css/lstyles.css */
+
 body {
     font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
+    background-color: #f5f5f5;
     margin: 0;
     padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    width: 80%;
+    max-width: 800px;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    text-align: center;
 }
 
 h1 {
-    color: #333;
-    text-align: center;
-    margin-top: 50px;
+    margin-bottom: 20px;
 }
 
 p {
-    color: #666;
+    margin-bottom: 40px;
+}
+
+.navigation {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.nav-button {
+    padding: 15px 30px;
+    background-color: #4CAF50;
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
     text-align: center;
+    font-size: 16px;
+}
+
+.nav-button:hover {
+    background-color: #45a049;
 }

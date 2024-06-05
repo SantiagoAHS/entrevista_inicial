@@ -7,7 +7,23 @@
     <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
 </head>
 <body>
-    <h1>Bienvenido a Mi Primer Proyecto</h1>
-    <p>Este es el contenido personalizado de mi página de inicio.</p>
+    <div class="container">
+        <h1>Bienvenido a Mi Primer Proyecto</h1>
+        <p>Este es el contenido personalizado de mi página de inicio.</p>
+        
+        <div class="navigation">
+            <a href="{% url 'lista_grupos' %}" class="nav-button">
+                Lista de Grupos
+            </a>
+            <a href="{% url 'pantalla_administracion' %}" class="nav-button">
+                Pantalla de Administración de Profesores
+            </a>
+            <a href="{% url 'administrar_carreras_grupos' %}" class="nav-button">
+                
+                <span>Administrar Carreras y Grupos</span>
+            </a>
+        </div>
+    </div>
 </body>
 </html>
+

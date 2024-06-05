@@ -173,6 +173,79 @@ def exportar_estudiantes_a_excel(estudiantes):
     return response
 
 
+# mi_aplicacion/views.py
+
+from django.shortcuts import render, get_object_or_404
+from django.http import JsonResponse
+from .models import Profesor, Carrera, Grupo
+from .forms import ProfesorForm
+
+def pantalla_administracion(request):
+    profesor_id = request.GET.get('profesor_id')
+    if request.method == 'POST':
+        if profesor_id:
+            profesor = get_object_or_404(Profesor, pk=profesor_id)
+            form = ProfesorForm(request.POST, instance=profesor)
+        else:
+            form = ProfesorForm(request.POST)
+        
+        if form.is_valid():
+            form.save()
+            # Redirigir o actualizar la página según sea necesario
+    else:
+        if profesor_id:
+            profesor = get_object_or_404(Profesor, pk=profesor_id)
+            form = ProfesorForm(instance=profesor)
+        else:
+            form = ProfesorForm()
+    
+    profesores = Profesor.objects.all()
+    return render(request, 'pantalla_administracion.html', {'form': form, 'profesores': profesores})
+
+def get_grupos(request, carrera_id):
+    grupos = Grupo.objects.filter(carrera_id=carrera_id).order_by('nombre').values('id', 'nombre')
+    return JsonResponse(list(grupos), safe=False)
+
+from django.shortcuts import render, get_object_or_404, redirect
+from .models import Carrera, Grupo
+from .forms import CarreraForm, GrupoForm
+
+def administrar_carreras_grupos(request):
+    carreras = Carrera.objects.all()
+    grupos = Grupo.objects.all()
+
+    carrera_form = CarreraForm(request.POST or None)
+    grupo_form = GrupoForm(request.POST or None)
+
+    if request.method == 'POST':
+        if 'carrera_submit' in request.POST and carrera_form.is_valid():
+            carrera_form.save()
+            return redirect('administrar_carreras_grupos')
+
+        if 'grupo_submit' in request.POST and grupo_form.is_valid():
+            grupo_form.save()
+            return redirect('administrar_carreras_grupos')
+
+    if 'carrera_id' in request.GET:
+        carrera_id = request.GET.get('carrera_id')
+        carrera = get_object_or_404(Carrera, id=carrera_id)
+        carrera_form = CarreraForm(instance=carrera)
+
+    if 'grupo_id' in request.GET:
+        grupo_id = request.GET.get('grupo_id')
+        grupo = get_object_or_404(Grupo, id=grupo_id)
+        grupo_form = GrupoForm(instance=grupo)
+
+    return render(request, 'administrar_carreras_grupos.html', {
+        'carrera_form': carrera_form,
+        'grupo_form': grupo_form,
+        'carreras': carreras,
+        'grupos': grupos,
+    })
+
+
+
+
 
 
 

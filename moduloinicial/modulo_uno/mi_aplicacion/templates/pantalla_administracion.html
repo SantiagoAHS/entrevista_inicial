@@ -1,0 +1,64 @@
+<!-- mi_aplicacion/templates/pantalla_administracion.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Pantalla de Administración</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/astyles.css' %}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Pantalla de Administración</h1>
+
+        <form id="profesor-form" method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Guardar</button>
+        </form>
+
+        <h2>Actualizar Profesor</h2>
+        <form id="actualizar-profesor-form" method="get">
+            <label for="profesor_id">Selecciona un profesor:</label>
+            <select id="profesor_id" name="profesor_id">
+                <option value="">Seleccionar</option>
+                {% for profesor in profesores %}
+                    <option value="{{ profesor.id }}">{{ profesor.nombre }}</option>
+                {% endfor %}
+            </select>
+            <button type="submit">Cargar</button>
+        </form>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            $('#id_carrera').change(function() {
+                var carreraId = $(this).val();
+                var url = '/get_grupos/' + carreraId + '/';
+                
+                $.get(url, function(data) {
+                    $('#id_grupo_tutor').empty();
+                    $.each(data, function(index, grupo) {
+                        $('#id_grupo_tutor').append($('<option>').val(grupo.id).text(grupo.nombre));
+                    });
+                });
+            });
+
+            // Trigger change event to populate grupo_tutor on page load if carrera is already selected
+            if ($('#id_carrera').val()) {
+                $('#id_carrera').trigger('change');
+            }
+
+            // Load the form with the selected professor's data for updating
+            $('#actualizar-profesor-form').submit(function(event) {
+                event.preventDefault();
+                var profesorId = $('#profesor_id').val();
+                if (profesorId) {
+                    var url = '/pantalla_administracion/?profesor_id=' + profesorId;
+                    window.location.href = url;
+                }
+            });
+        });
+    </script>
+</body>
+</html>
